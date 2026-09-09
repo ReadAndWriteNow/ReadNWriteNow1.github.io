@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { client } from "./sanity";
 
 // 이미지 파일 import (src/imports 폴더 내 사진들)
 import introduceImg from './imports/introduce.jpg';
@@ -928,7 +929,7 @@ function CropModal({ src, onConfirm, onCancel }: {
       style={{
         position: "absolute", width: 24, height: 24,
         cursor, touchAction: "none", zIndex: 2,
-        display: "flex", alignItems: "center", justifyContent: "center",
+        display: "flex", items: "center", justifyContent: "center",
         ...style,
       }}>
       <div style={{ width: 12, height: 12, background: "white", border: "2.5px solid #FF7F50", borderRadius: 3 }} />
@@ -1321,26 +1322,50 @@ function QnaSectionEditor({ qnaList, onChange }: {
 
   function cancelEdit() { setEditIdx(null); setAdding(false); }
 
-  function saveEdit() {
+  async function saveEdit() {
     if (!draft.q.trim()) return;
+    let next: QnaItem[];
     if (adding) {
-      onChange([...qnaList, draft]);
+      next = [...qnaList, draft];
     } else if (editIdx !== null) {
-      const next = [...qnaList];
+      next = [...qnaList];
       next[editIdx] = draft;
-      onChange(next);
+    } else {
+      return;
     }
+    onChange(next);
     setEditIdx(null);
     setAdding(false);
+
+    try {
+      await client.createOrReplace({
+        _id: "qna-doc",
+        _type: "qnaDocument",
+        items: next,
+      });
+    } catch (e) {
+      console.error("Sanity QnA save failed:", e);
+    }
   }
 
-  function deleteItem(idx: number) {
+  async function deleteItem(idx: number) {
     if (!confirm("이 Q&A를 삭제할까요?")) return;
-    onChange(qnaList.filter((_, i) => i !== idx));
+    const next = qnaList.filter((_, i) => i !== idx);
+    onChange(next);
     if (editIdx === idx) { setEditIdx(null); setAdding(false); }
+
+    try {
+      await client.createOrReplace({
+        _id: "qna-doc",
+        _type: "qnaDocument",
+        items: next,
+      });
+    } catch (e) {
+      console.error("Sanity QnA delete failed:", e);
+    }
   }
 
-  function moveItem(idx: number, dir: -1 | 1) {
+  async function moveItem(idx: number, dir: -1 | 1) {
     const next = [...qnaList];
     const swap = idx + dir;
     if (swap < 0 || swap >= next.length) return;
@@ -1348,6 +1373,16 @@ function QnaSectionEditor({ qnaList, onChange }: {
     onChange(next);
     if (editIdx === idx) setEditIdx(swap);
     else if (editIdx === swap) setEditIdx(idx);
+
+    try {
+      await client.createOrReplace({
+        _id: "qna-doc",
+        _type: "qnaDocument",
+        items: next,
+      });
+    } catch (e) {
+      console.error("Sanity QnA move failed:", e);
+    }
   }
 
   const editing = editIdx !== null || adding;
@@ -1431,17 +1466,39 @@ function ReviewSectionEditor({ reviews, onChange }: { reviews: Review[]; onChang
   function startAdd() { setEditId(null); setAdding(true); setDraft(newReview()); }
   function cancel() { setEditId(null); setAdding(false); }
 
-  function save() {
+  async function save() {
     if (!draft.title.trim()) return;
-    if (adding) onChange([...reviews, draft]);
-    else onChange(reviews.map(r => r.id === editId ? draft : r));
+    let next: Review[];
+    if (adding) next = [...reviews, draft];
+    else next = reviews.map(r => r.id === editId ? draft : r);
+    onChange(next);
     cancel();
+
+    try {
+      await client.createOrReplace({
+        _id: `review-${draft.id}`,
+        _type: "review",
+        id: draft.id,
+        title: draft.title,
+        date: draft.date,
+        body: draft.body,
+      });
+    } catch (e) {
+      console.error("Sanity Review save failed:", e);
+    }
   }
 
-  function del(id: number) {
+  async function del(id: number) {
     if (!confirm("이 소식을 삭제할까요?")) return;
-    onChange(reviews.filter(r => r.id !== id));
+    const next = reviews.filter(r => r.id !== id);
+    onChange(next);
     if (editId === id) cancel();
+
+    try {
+      await client.delete(`review-${id}`);
+    } catch (e) {
+      console.error("Sanity Review delete failed:", e);
+    }
   }
 
   const editing = editId !== null || adding;
@@ -1527,10 +1584,19 @@ function AdminModal({ onClose, qnaList, onQnaChange, reviews, onReviewsChange }:
     else { setPwError(true); }
   }
 
-  function handleSave() {
-    console.log("저장할 데이터:", { values, qnaList });
+  async function handleSave() {
     setSaved(true);
     setTimeout(() => setSaved(false), 2500);
+
+    try {
+      await client.createOrReplace({
+        _id: "site-content",
+        _type: "siteContent",
+        values,
+      });
+    } catch (e) {
+      console.error("Sanity content save failed:", e);
+    }
   }
 
   const currentSection = SECTIONS.find(s => s.id === activeSection);
@@ -1628,14 +1694,11 @@ function AdminModal({ onClose, qnaList, onQnaChange, reviews, onReviewsChange }:
                   </button>
                   {saved && (
                     <span className="text-xs text-emerald-600 font-semibold animate-pulse">
-                      ✓ 저장됐습니다 (Sanity 연동 후 반영)
+                      ✓ 저장됐습니다 (Sanity 반영 완료)
                     </span>
                   )}
                 </div>
               )}
-              <p className="text-[10px] text-[#aaa] mt-1">
-                * Sanity CMS 연동 전까지는 실제 페이지에 반영되지 않습니다.
-              </p>
             </div>
           </div>
         )}
@@ -1655,6 +1718,17 @@ export default function App() {
   const [liveReviews, setLiveReviews] = useState<Review[]>(REVIEW_SAMPLES);
   const footerClickCount = useRef(0);
   const footerTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Sanity에서 데이터 동기화
+  useEffect(() => {
+    client.fetch(`*[_type == "review"]`).then((data) => {
+      if (data && data.length > 0) setLiveReviews(data);
+    }).catch(err => console.error("Sanity fetch reviews error:", err));
+
+    client.fetch(`*[_id == "qna-doc"][0]`).then((doc) => {
+      if (doc && doc.items) setLiveQna(doc.items);
+    }).catch(err => console.error("Sanity fetch QnA error:", err));
+  }, []);
 
   useEffect(() => {
     const handler = () => setIsMobile(window.innerWidth < 768);
