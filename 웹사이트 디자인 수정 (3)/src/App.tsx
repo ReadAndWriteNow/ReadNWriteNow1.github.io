@@ -1,5 +1,14 @@
 import { useState, useEffect, useRef } from "react";
 
+// 이미지 파일 import (src/imports 폴더 내 사진들)
+import introduceImg from './imports/introduce.jpg';
+import classroomImg from './imports/classroom.jpg';
+import classroom2Img from './imports/classroom2.jpg';
+import classroom3Img from './imports/classroom3.jpg';
+import curriculum1Img from './imports/curriculum1.jpg';
+import curriculum2Img from './imports/curriculum2.jpg';
+import curriculum3Img from './imports/curriculum3.png';
+
 const NAV_ITEMS = [
   { href: "about", label: "교습소 소개" },
   { href: "curriculum", label: "커리큘럼" },
@@ -62,7 +71,7 @@ function MobileLayout({ onQna, onReview }: { onQna: () => void; onReview: () => 
         <div className="flex items-start justify-between">
           <div>
             <p className="text-[10px] font-medium tracking-widest uppercase text-orange-100 mb-1">
-              Hanwoori Reading & Discussion
+              Hanwoori Reading &amp; Discussion
             </p>
             <h1 className="text-2xl font-extrabold leading-tight tracking-tight">
               한우리 독서토론논술
@@ -129,7 +138,7 @@ function MobileLayout({ onQna, onReview }: { onQna: () => void; onReview: () => 
 
         <div className="mt-5 rounded-2xl overflow-hidden shadow-sm bg-[#FFF0EA] aspect-[3/2]">
           <img
-            src="/src/imports/introduce.jpg"
+            src={introduceImg}
             alt="원장 소개"
             className="w-full h-full object-cover object-center"
           />
@@ -188,10 +197,10 @@ function MobileLayout({ onQna, onReview }: { onQna: () => void; onReview: () => 
         </p>
         <div className="mt-4 space-y-4">
           <div className="rounded-2xl overflow-hidden shadow-sm bg-gray-100 aspect-[4/3]">
-            <img src="/src/imports/curriculum2.jpg" alt="수업 모습 1" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            <img src={curriculum2Img} alt="수업 모습 1" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
           </div>
           <div className="rounded-2xl overflow-hidden shadow-sm bg-gray-100 aspect-[4/3]">
-            <img src="/src/imports/curriculum1.jpg" alt="수업 모습 2" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            <img src={curriculum1Img} alt="수업 모습 2" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
           </div>
         </div>
       </section>
@@ -203,10 +212,10 @@ function MobileLayout({ onQna, onReview }: { onQna: () => void; onReview: () => 
         <MobileSectionTitle>시설 안내</MobileSectionTitle>
         <div className="mt-5 space-y-4">
           <div className="rounded-2xl overflow-hidden shadow-sm bg-gray-100 aspect-[4/3]">
-            <img src="/src/imports/classroom3.jpg" alt="교실 내부 모습" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            <img src={classroom3Img} alt="교실 내부 모습" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
           </div>
           <div className="rounded-2xl overflow-hidden shadow-sm bg-gray-100 aspect-[4/3]">
-            <img src="/src/imports/classroom2.jpg" alt="학원 내부 모습" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            <img src={classroom2Img} alt="학원 내부 모습" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
           </div>
         </div>
         <p className="mt-3 text-xs text-center text-[#6B7280]">쾌적하고 집중하기 좋은 환경에서 소수 정예로 수업합니다.</p>
@@ -328,7 +337,7 @@ function PCLayout({ onQna, onReview }: { onQna: () => void; onReview: () => void
           <div className="flex items-end justify-between mb-7">
             <div>
               <p className="text-xs font-medium tracking-widest uppercase text-orange-100 mb-1">
-                Hanwoori Reading & Discussion
+                Hanwoori Reading &amp; Discussion
               </p>
               <h1 className="text-5xl font-extrabold leading-tight tracking-tight">한우리 독서토론논술</h1>
               <p className="text-xl mt-1 text-orange-100">파주운정 산내푸르지오 독서교실</p>
@@ -385,7 +394,7 @@ function PCLayout({ onQna, onReview }: { onQna: () => void; onReview: () => void
           </div>
           <div className="rounded-2xl overflow-hidden shadow-sm bg-[#FFF0EA] self-stretch">
             <img
-              src="/src/imports/introduce.jpg"
+              src={introduceImg}
               alt="원장 소개"
               className="w-full h-full object-cover object-center block hover:scale-105 transition-transform duration-500"
             />
@@ -423,10 +432,10 @@ function PCLayout({ onQna, onReview }: { onQna: () => void; onReview: () => void
         </p>
         <div className="grid grid-cols-2 gap-6 mt-6">
           <div className="rounded-2xl overflow-hidden shadow-sm bg-gray-100 aspect-[4/3]">
-            <img src="/src/imports/curriculum2.jpg" alt="수업 모습 1" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            <img src={curriculum2Img} alt="수업 모습 1" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
           </div>
           <div className="rounded-2xl overflow-hidden shadow-sm bg-gray-100 aspect-[4/3]">
-            <img src="/src/imports/curriculum1.jpg" alt="수업 모습 2" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            <img src={curriculum1Img} alt="수업 모습 2" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
           </div>
         </div>
       </section>
@@ -438,10 +447,10 @@ function PCLayout({ onQna, onReview }: { onQna: () => void; onReview: () => void
         <PCSectionTitle>시설 안내</PCSectionTitle>
         <div className="grid grid-cols-2 gap-6 mt-10">
           <div className="rounded-2xl overflow-hidden shadow-sm bg-gray-100 aspect-[4/3]">
-            <img src="/src/imports/classroom3.jpg" alt="교실 내부 모습" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            <img src={classroom3Img} alt="교실 내부 모습" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
           </div>
           <div className="rounded-2xl overflow-hidden shadow-sm bg-gray-100 aspect-[4/3]">
-            <img src="/src/imports/classroom2.jpg" alt="학원 내부 모습" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
+            <img src={classroom2Img} alt="학원 내부 모습" className="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
           </div>
         </div>
         <p className="text-center text-sm text-[#6B7280] mt-4">쾌적하고 집중하기 좋은 환경에서 소수 정예로 수업합니다.</p>
@@ -554,11 +563,11 @@ function PCInfoItem({ icon, label, value }: { icon: string; label: string; value
 const QNA_LIST = [
   {
     q: "어떤 마음가짐으로 운영하시나요?",
-    a: `제 아이가 초등학교에 입학하면서 학교 독서 지원단과 책 읽어주기 어머니 봉사활동을 시작하게 되었습니다. 아이들에게 책을 읽어주며 제 이야기에 귀 기울이고 몰입하는 모습을 볼 때마다 큰 행복과 보람을 느꼈고, 자연스럽게 독서 교육에 관심을 갖게 되었습니다.\n\n처음에는 제 아이를 잘 키우고 싶은 마음에서 출발했지만, 아이들과 책을 함께 읽는 시간이 쌓이면서 <strong>우리 지역의 더 많은 아이에게 올바른 독서 방법과 토론의 즐거움을 전하고 싶다</strong>는 생각이 커졌습니다. 그 마음을 바탕으로 지금의 한우리독서토론논술 교습소를 설립하게 되었습니다.<br><br><img src="/src/imports/classroom.jpg" alt="교실 모습" style="width:100%; border-radius:12px; display:block;" />`,
+    a: `제 아이가 초등학교에 입학하면서 학교 독서 지원단과 책 읽어주기 어머니 봉사활동을 시작하게 되었습니다. 아이들에게 책을 읽어주며 제 이야기에 귀 기울이고 몰입하는 모습을 볼 때마다 큰 행복과 보람을 느꼈고, 자연스럽게 독서 교육에 관심을 갖게 되었습니다.\n\n처음에는 제 아이를 잘 키우고 싶은 마음에서 출발했지만, 아이들과 책을 함께 읽는 시간이 쌓이면서 <strong>우리 지역의 더 많은 아이에게 올바른 독서 방법과 토론의 즐거움을 전하고 싶다</strong>는 생각이 커졌습니다. 그 마음을 바탕으로 지금의 한우리독서토론논술 교습소를 설립하게 되었습니다.<br><br><img src="${classroomImg}" alt="교실 모습" style="width:100%; border-radius:12px; display:block;" />`,
   },
   {
     q: "수업은 어떤 프로그램으로 진행되나요?",
-    a: `저희 교습소는 <strong>'한우리독서토론논술'</strong>의 체계적인 프로그램을 바탕으로 유아부터 초등, 중등까지 아이의 발달 단계와 눈높이에 맞는 독서토론논술 수업을 진행하고 있습니다.\n\n한우리독서토론논술 연구원들은 매달 교과 과정에 맞춰 필독서를 선정하고, 책에 맞는 교재를 새롭게 구성합니다. 저희는 선정된 필독서를 깊이 있게 읽고, 교재를 바탕으로 <strong>자신의 생각을 논리적으로 나누는 토론과 글로 표현하는 논술 수업</strong>을 진행하며 아이의 배경지식과 사고력을 자연스럽게 넓혀가고 있습니다.\n\n최근에는 <strong>'몰입독서'</strong> 프로그램도 새롭게 도입했습니다. 한 권의 책을 끝까지 읽어낼 수 있도록 선생님이 전 과정을 밀착해 지도하며, <strong>여러 권을 읽는 것보다 한 권을 제대로 읽는 힘</strong>을 기르는 데 초점을 맞췄습니다.<br><br><img src="/src/imports/curriculum3.png" alt="상세 커리큘럼" style="width:100%; border-radius:12px; margin-top:8px; display:block;" />`,
+    a: `저희 교습소는 <strong>'한우리독서토론논술'</strong>의 체계적인 프로그램을 바탕으로 유아부터 초등, 중등까지 아이의 발달 단계와 눈높이에 맞는 독서토론논술 수업을 진행하고 있습니다.\n\n한우리독서토론논술 연구원들은 매달 교과 과정에 맞춰 필독서를 선정하고, 책에 맞는 교재를 새롭게 구성합니다. 저희는 선정된 필독서를 깊이 있게 읽고, 교재를 바탕으로 <strong>자신의 생각을 논리적으로 나누는 토론과 글로 표현하는 논술 수업</strong>을 진행하며 아이의 배경지식과 사고력을 자연스럽게 넓혀가고 있습니다.\n\n최근에는 <strong>'몰입독서'</strong> 프로그램도 새롭게 도입했습니다. 한 권의 책을 끝까지 읽어낼 수 있도록 선생님이 전 과정을 밀착해 지도하며, <strong>여러 권을 읽는 것보다 한 권을 제대로 읽는 힘</strong>을 기르는 데 초점을 맞췄습니다.<br><br><img src="${curriculum3Img}" alt="상세 커리큘럼" style="width:100%; border-radius:12px; margin-top:8px; display:block;" />`,
   },
   { q: "수강 대상 연령은 어떻게 되나요?", a: "내용을 입력해 주세요." },
   { q: "수업료 및 교재비는 어떻게 되나요?", a: "내용을 입력해 주세요." },
@@ -911,7 +920,6 @@ function CropModal({ src, onConfirm, onCancel }: {
     img.src = src;
   }
 
-  // 핸들 공통 스타일 — 터치 영역 넓게 (24px), 시각적으로는 12px
   const H = (handle: string, style: React.CSSProperties, cursor: string) => (
     <div
       key={handle}
@@ -938,18 +946,15 @@ function CropModal({ src, onConfirm, onCancel }: {
         </div>
         <p className="px-5 pt-3 pb-1 text-xs text-[#6B7280]">모서리·변 핸들을 드래그해서 영역을 조절하세요.</p>
 
-        {/* 이미지 컨테이너 */}
         <div ref={containerRef} className="relative m-4 select-none rounded-xl overflow-hidden"
           style={{ touchAction: "none", userSelect: "none" }}>
-          <img src={src} className="w-full block" draggable={false} />
+          <img src={src} className="w-full block" draggable={false} alt="미리보기" />
 
-          {/* 어두운 마스크 (선택 영역 밖) */}
           <div className="absolute inset-0 pointer-events-none" style={{
             background: "rgba(0,0,0,.5)",
             clipPath: `polygon(0% 0%,100% 0%,100% 100%,0% 100%,0% 0%,${x}% ${y}%,${x}% ${y+h}%,${x+w}% ${y+h}%,${x+w}% ${y}%,${x}% ${y}%)`,
           }} />
 
-          {/* 선택 박스 (이동 전용, 핸들 제외 영역만) */}
           <div
             onMouseDown={e => startDrag("move", e)}
             onTouchStart={e => startDrag("move", e)}
@@ -958,14 +963,12 @@ function CropModal({ src, onConfirm, onCancel }: {
               left: `${x}%`, top: `${y}%`, width: `${w}%`, height: `${h}%`,
               border: "2px solid #FF7F50", cursor: "move", touchAction: "none", boxSizing: "border-box",
             }}>
-            {/* 3등분 격자선 */}
             <div style={{ position:"absolute", left:"33.3%", top:0, bottom:0, borderLeft:"1px solid rgba(255,127,80,.4)", pointerEvents:"none" }} />
             <div style={{ position:"absolute", left:"66.6%", top:0, bottom:0, borderLeft:"1px solid rgba(255,127,80,.4)", pointerEvents:"none" }} />
             <div style={{ position:"absolute", top:"33.3%", left:0, right:0, borderTop:"1px solid rgba(255,127,80,.4)", pointerEvents:"none" }} />
             <div style={{ position:"absolute", top:"66.6%", left:0, right:0, borderTop:"1px solid rgba(255,127,80,.4)", pointerEvents:"none" }} />
           </div>
 
-          {/* 핸들 — 박스 바깥에 독립 렌더 (stopPropagation 확실히) */}
           {H("nw", { left:`${x}%`, top:`${y}%`,   transform:"translate(-50%,-50%)" }, "nw-resize")}
           {H("ne", { left:`${x+w}%`, top:`${y}%`, transform:"translate(-50%,-50%)" }, "ne-resize")}
           {H("sw", { left:`${x}%`, top:`${y+h}%`, transform:"translate(-50%,-50%)" }, "sw-resize")}
@@ -1002,7 +1005,6 @@ function ImageControls({ img, onDone, onFlush }: {
   const toolbarRef = useRef<HTMLDivElement>(null);
   const [showCrop, setShowCrop] = useState(false);
 
-  // 오버레이 위치를 img 기준으로 직접 DOM 업데이트 (리렌더 없이)
   function reposition() {
     const r = img.getBoundingClientRect();
     if (borderRef.current) {
@@ -1016,7 +1018,6 @@ function ImageControls({ img, onDone, onFlush }: {
         left: `${r.left}px`, top: `${Math.max(4, r.top - 42)}px`,
       });
     }
-    // 핸들 위치 업데이트
     const handles = overlayRef.current?.querySelectorAll<HTMLDivElement>("[data-handle]");
     handles?.forEach(h => {
       const pos = h.dataset.handle!;
@@ -1056,10 +1057,8 @@ function ImageControls({ img, onDone, onFlush }: {
         document.body.style.userSelect = "";
         onFlush();
       }
-      // 마우스
       const onMouseMove = (me: MouseEvent) => onMove(me.clientX);
       const onMouseUp = () => { cleanup(); document.removeEventListener("mousemove", onMouseMove); document.removeEventListener("mouseup", onMouseUp); };
-      // 터치
       const onTouchMove = (te: TouchEvent) => { te.preventDefault(); onMove(te.touches[0].clientX); };
       const onTouchEnd = () => { cleanup(); document.removeEventListener("touchmove", onTouchMove); document.removeEventListener("touchend", onTouchEnd); };
 
@@ -1095,17 +1094,14 @@ function ImageControls({ img, onDone, onFlush }: {
 
   return (
     <div ref={overlayRef}>
-      {/* 선택 테두리 */}
       <div ref={borderRef} style={{ position: "fixed", border: "2px solid #FF7F50", borderRadius: 10, zIndex: 54, pointerEvents: "none",
         left: r.left - 2, top: r.top - 2, width: r.width + 4, height: r.height + 4 }} />
-      {/* 핸들 — 좌우만 크기조정, 나머지는 자리 표시 */}
       <div data-handle="nw" style={{ ...hBase, left: r.left - 7, top: r.top - 7, cursor: "nw-resize" }} {...startResize("w")} />
       <div data-handle="ne" style={{ ...hBase, left: r.right - 7, top: r.top - 7, cursor: "ne-resize" }} {...startResize("e")} />
       <div data-handle="sw" style={{ ...hBase, left: r.left - 7, top: r.bottom - 7, cursor: "sw-resize" }} {...startResize("w")} />
       <div data-handle="se" style={{ ...hBase, left: r.right - 7, top: r.bottom - 7, cursor: "se-resize" }} {...startResize("e")} />
       <div data-handle="n"  style={{ ...hBase, left: r.left + r.width / 2 - 7, top: r.top - 7, cursor: "ew-resize" }} {...startResize("e")} />
       <div data-handle="s"  style={{ ...hBase, left: r.left + r.width / 2 - 7, top: r.bottom - 7, cursor: "ew-resize" }} {...startResize("e")} />
-      {/* 툴바 */}
       <div ref={toolbarRef} style={{ position: "fixed", left: r.left, top: Math.max(4, r.top - 42), display: "flex", gap: 6, zIndex: 56 }}>
         <button onMouseDown={e => e.stopPropagation()} onClick={() => setShowCrop(true)}
           style={{ background: "#1E2B3A", color: "white", border: "none", borderRadius: 8, padding: "5px 12px", fontSize: 12, fontWeight: 700, cursor: "pointer", whiteSpace: "nowrap" }}>
@@ -1130,12 +1126,10 @@ function RichEditor({ value, onChange }: { value: string; onChange: (html: strin
   const [selectedImg, setSelectedImg] = useState<HTMLImageElement | null>(null);
   const savedRange = useRef<Range | null>(null);
 
-  // 열릴 때 한 번만 초기값 주입 (value가 새 QnA로 바뀔 때만 재주입)
   const lastValue = useRef<string | null>(null);
   useEffect(() => {
     const el = editorRef.current;
     if (!el || lastValue.current === value) return;
-    // \n\n → 문단 여백, \n → <br> 로 변환해서 넣기
     const normalised = value
       .replace(/\n\n/g, "</p><p>")
       .replace(/\n/g, "<br>");
@@ -1184,7 +1178,6 @@ function RichEditor({ value, onChange }: { value: string; onChange: (html: strin
         `<img src="${src}" alt="첨부 이미지" style="width:100%;border-radius:10px;margin-top:8px;display:block;" />`);
       flush();
       setUploading(false);
-      // 같은 파일 재선택 가능하도록 초기화
       e.target.value = "";
     };
     reader.readAsDataURL(file);
@@ -1194,7 +1187,6 @@ function RichEditor({ value, onChange }: { value: string; onChange: (html: strin
 
   return (
     <div className="border border-gray-200 rounded-xl overflow-hidden focus-within:border-[#FF7F50] transition">
-      {/* 툴바 */}
       <div className="flex flex-wrap items-center gap-1.5 px-3 py-2 bg-gray-50 border-b border-gray-100">
         <button type="button" onMouseDown={e => { e.preventDefault(); exec("undo"); }} className={tb} title="되돌리기 (Ctrl+Z)">
           ↩ 되돌리기
@@ -1255,7 +1247,6 @@ function RichEditor({ value, onChange }: { value: string; onChange: (html: strin
         </button>
       </div>
 
-      {/* 사진 URL 입력 */}
       {showImg && (
         <div className="flex items-center gap-2 px-3 py-2 bg-orange-50 border-b border-orange-100">
           <input type="text" value={imgUrl} onChange={e => setImgUrl(e.target.value)}
@@ -1268,7 +1259,6 @@ function RichEditor({ value, onChange }: { value: string; onChange: (html: strin
         </div>
       )}
 
-      {/* 편집 영역 — Enter=문단, Shift+Enter=줄바꿈 */}
       <div
         ref={editorRef}
         contentEditable
@@ -1298,7 +1288,6 @@ function RichEditor({ value, onChange }: { value: string; onChange: (html: strin
         Enter = 문단 나누기 (한 줄 여백)&nbsp;&nbsp;·&nbsp;&nbsp;Shift + Enter = 줄바꿈 (여백 없이)&nbsp;&nbsp;·&nbsp;&nbsp;텍스트 선택 후 굵게/밑줄
       </p>
 
-      {/* 편집 영역 내부 문단 간격 CSS */}
       <style>{`
         .rich-edit p { margin: 0 0 0.9em 0; }
         .rich-edit p:last-child { margin-bottom: 0; }
@@ -1373,7 +1362,6 @@ function QnaSectionEditor({ qnaList, onChange }: {
         </button>
       </div>
 
-      {/* 목록 */}
       <div className="flex flex-col gap-2">
         {qnaList.map((item, idx) => (
           <div key={idx}
@@ -1401,7 +1389,6 @@ function QnaSectionEditor({ qnaList, onChange }: {
         )}
       </div>
 
-      {/* 편집/추가 폼 */}
       {editing && (
         <div className="border-2 border-[#FF7F50] rounded-2xl p-4 flex flex-col gap-3 bg-white">
           <p className="text-xs font-extrabold text-[#E8623A]">{adding ? "새 질문 추가" : `${editIdx! + 1}번 질문 수정`}</p>
@@ -1469,7 +1456,6 @@ function ReviewSectionEditor({ reviews, onChange }: { reviews: Review[]; onChang
         </button>
       </div>
 
-      {/* 목록 */}
       <div className="flex flex-col gap-2">
         {reviews.length === 0 && <p className="text-xs text-[#aaa] text-center py-4">등록된 수업 소식이 없습니다.</p>}
         {[...reviews].sort((a,b) => b.date.localeCompare(a.date)).map(r => (
@@ -1488,7 +1474,6 @@ function ReviewSectionEditor({ reviews, onChange }: { reviews: Review[]; onChang
         ))}
       </div>
 
-      {/* 편집/추가 폼 */}
       {editing && (
         <div className="border-2 border-[#FF7F50] rounded-2xl p-4 flex flex-col gap-3 bg-white">
           <p className="text-xs font-extrabold text-[#E8623A]">{adding ? "새 수업 소식 작성" : "수업 소식 수정"}</p>
@@ -1557,7 +1542,6 @@ function AdminModal({ onClose, qnaList, onQnaChange, reviews, onReviewsChange }:
 
       <div className="bg-white rounded-3xl shadow-2xl w-full max-w-2xl max-h-[90vh] flex flex-col overflow-hidden">
 
-        {/* 헤더 */}
         <div className="bg-[#FF7F50] px-6 py-5 flex items-center justify-between shrink-0">
           <div>
             <p className="text-xs font-semibold text-orange-100 uppercase tracking-widest">Admin</p>
@@ -1571,7 +1555,6 @@ function AdminModal({ onClose, qnaList, onQnaChange, reviews, onReviewsChange }:
           </button>
         </div>
 
-        {/* 비밀번호 */}
         {step === "pw" && (
           <form onSubmit={handleLogin} className="p-8 flex flex-col gap-4">
             <p className="text-sm text-[#6B7280]">관리자 비밀번호를 입력해 주세요.</p>
@@ -1592,10 +1575,8 @@ function AdminModal({ onClose, qnaList, onQnaChange, reviews, onReviewsChange }:
           </form>
         )}
 
-        {/* 편집 */}
         {step === "edit" && (
           <div className="flex flex-1 overflow-hidden min-h-0">
-            {/* 사이드바 */}
             <div className="w-36 shrink-0 border-r border-gray-100 bg-[#f9fafb] py-4 overflow-y-auto">
               {NAV_SIDEBAR.map(s => (
                 <button key={s.id} onClick={() => setActiveSection(s.id)}
@@ -1608,7 +1589,6 @@ function AdminModal({ onClose, qnaList, onQnaChange, reviews, onReviewsChange }:
               ))}
             </div>
 
-            {/* 폼 */}
             <div className="flex-1 overflow-y-auto p-6 flex flex-col gap-5">
               {activeSection === "qna" ? (
                 <QnaSectionEditor qnaList={qnaList} onChange={onQnaChange} />
@@ -1640,7 +1620,6 @@ function AdminModal({ onClose, qnaList, onQnaChange, reviews, onReviewsChange }:
                 </>
               ) : null}
 
-              {/* 저장 버튼 — QnA·리뷰 탭은 자체 저장 */}
               {activeSection !== "qna" && activeSection !== "reviews" && (
                 <div className="mt-2 flex items-center gap-3">
                   <button onClick={handleSave}
